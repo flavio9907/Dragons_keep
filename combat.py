@@ -4,6 +4,7 @@ Person 2's module: defines all enemies, combat logic, and reward handling.
 """
 
 import random
+from inventory import use_item, show_inventory, ITEMS
 
 # ---------------------------------------------------------------------------
 # ENEMY DATA
@@ -208,7 +209,7 @@ def run_combat(player: dict, enemy_id: str) -> tuple:
 
     while player["hp"] > 0 and enemy["hp"] > 0:
         print(f"  Your HP: {player['hp']}/{player['max_hp']}  |  {enemy['name']} HP: {enemy['hp']}/{enemy['max_hp']}")
-        print("  Actions: [1] Attack  [2] Use Potion  [3] Run")
+        print("  Actions: [1] Attack  [2] Use Item  [3] Run")
 
         try:
             choice = input("  > ").strip()
@@ -221,13 +222,24 @@ def run_combat(player: dict, enemy_id: str) -> tuple:
                 player = enemy_attack(enemy, player)
 
         elif choice == "2":
-            # Delegate to inventory system
-            from inventory import use_item
-            if "health_potion" in player["inventory"]:
-                player = use_item(player, "health_potion")
-                player = enemy_attack(enemy, player)
+            show_inventory(player)
+            item_choice = input("  Use which item? > ").strip().lower()
+            if item_choice not in player["inventory"]:
+                print(f"  ❌ You don't have '{item_choice}' in your inventory.")
             else:
-                print("  ❌ You have no health potions!")
+                item_data = ITEMS.get(item_choice, {})
+                item_type = item_data.get("type", "")
+                if item_type in ("weapon", "armor"):
+                    print(f"  ❌ You can't use equipment in combat! Equip weapons and armor before a fight.")
+                else:
+                    player = use_item(player, item_choice)
+                    if "_scroll_damage" in player:
+                        damage = player.pop("_scroll_damage")
+                        enemy["hp"] = max(0, enemy["hp"] - damage)
+                        print(f"  📜 The scroll blasts the {enemy['name']} for {damage} damage!")
+                    # Enemy only counter-attacks if still alive
+                    if enemy["hp"] > 0:
+                        player = enemy_attack(enemy, player)
 
         elif choice == "3":
             escape_chance = random.random()
