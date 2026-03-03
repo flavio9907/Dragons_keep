@@ -3,12 +3,7 @@ world.py — World & Navigation System
 Person 1's module: defines all rooms, map layout, and movement logic.
 """
 
-# ---------------------------------------------------------------------------
-# WORLD DATA
-# ---------------------------------------------------------------------------
-
 ROOMS = {
-    # ── STARTING AREA ───────────────────────────────────────────────────────
     "entrance": {
         "name": "Castle Entrance",
         "description": (
@@ -29,8 +24,6 @@ ROOMS = {
         "items": [],
         "enemy": None,
     },
-
-    # ── FOREST AREA ─────────────────────────────────────────────────────────
     "forest_path": {
         "name": "Forest Path",
         "description": (
@@ -48,7 +41,7 @@ ROOMS = {
             "all around. A faint glimmer on the ground catches your eye."
         ),
         "exits": {"north": "forest_path", "west": "abandoned_camp"},
-        "items": ["magic_scroll", "gold_coin", "gold_coin"],
+        "items": ["gold_coin", "gold_coin"],
         "enemy": "wolf",
     },
     "abandoned_camp": {
@@ -58,7 +51,7 @@ ROOMS = {
             "someone left in a hurry. A rusted chest sits in the corner."
         ),
         "exits": {"east": "deep_forest"},
-        "items": ["health_potion", "gold_coin", "gold_coin", "iron_shield"],
+        "items": ["gold_coin", "gold_coin", "iron_shield"],
         "enemy": None,
     },
     "swamp": {
@@ -68,7 +61,7 @@ ROOMS = {
             "Every step sinks slightly into the mud. You hear splashing nearby."
         ),
         "exits": {"west": "forest_path", "north": "courtyard", "south": "swamp_depths"},
-        "items": ["gold_coin"],
+        "items": [],
         "enemy": "goblin",
     },
     "swamp_depths": {
@@ -81,8 +74,6 @@ ROOMS = {
         "items": ["health_potion", "magic_scroll"],
         "enemy": "troll",
     },
-
-    # ── CASTLE MAIN WING ────────────────────────────────────────────────────
     "hallway": {
         "name": "Dark Hallway",
         "description": (
@@ -90,7 +81,7 @@ ROOMS = {
             "stare down with empty eyes. You hear growling to the north."
         ),
         "exits": {"south": "entrance", "north": "throne_room", "east": "library", "west": "barracks"},
-        "items": ["health_potion"],
+        "items": [],
         "enemy": "goblin",
     },
     "barracks": {
@@ -100,7 +91,7 @@ ROOMS = {
             "stands. A skeleton soldier stirs as you enter."
         ),
         "exits": {"east": "hallway", "north": "armory"},
-        "items": ["gold_coin", "gold_coin", "steel_sword"],
+        "items": ["steel_sword"],
         "enemy": "skeleton",
     },
     "armory": {
@@ -110,7 +101,7 @@ ROOMS = {
             "pieces remain. A guard wolf circles the room protectively."
         ),
         "exits": {"south": "barracks"},
-        "items": ["rusty_sword", "iron_shield", "chainmail", "gold_coin"],
+        "items": ["iron_shield", "chainmail", "gold_coin"],
         "enemy": "wolf",
     },
     "courtyard": {
@@ -120,7 +111,7 @@ ROOMS = {
             "sits in the center. Something rustles in the bushes."
         ),
         "exits": {"west": "entrance", "north": "library", "south": "swamp", "east": "garden"},
-        "items": ["gold_coin", "gold_coin"],
+        "items": [],
         "enemy": "wolf",
     },
     "garden": {
@@ -130,11 +121,9 @@ ROOMS = {
             "Black flowers bloom in eerie silence. A giant spider descends from above."
         ),
         "exits": {"west": "courtyard"},
-        "items": ["magic_scroll", "health_potion"],
+        "items": [],
         "enemy": "giant_spider",
     },
-
-    # ── UPPER CASTLE ────────────────────────────────────────────────────────
     "library": {
         "name": "Ancient Library",
         "description": (
@@ -162,7 +151,7 @@ ROOMS = {
             "pulses with dim light. Bookshelves have been ransacked."
         ),
         "exits": {"south": "library", "north": "tower_stairs"},
-        "items": ["magic_scroll", "magic_scroll", "health_potion"],
+        "items": ["magic_scroll"],
         "enemy": "skeleton",
     },
     "tower_stairs": {
@@ -175,8 +164,6 @@ ROOMS = {
         "items": ["health_potion", "gold_coin"],
         "enemy": "troll",
     },
-
-    # ── FINAL AREA ──────────────────────────────────────────────────────────
     "throne_room": {
         "name": "The Throne Room",
         "description": (
@@ -190,10 +177,6 @@ ROOMS = {
     },
 }
 
-
-# ---------------------------------------------------------------------------
-# NAVIGATION FUNCTIONS
-# ---------------------------------------------------------------------------
 
 def get_room(room_id: str) -> dict:
     """
