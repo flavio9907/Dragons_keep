@@ -30,6 +30,7 @@ COMMANDS = """
     drop <item>        — Drop an item
     inventory          — Show your inventory
     stats              — Show your stats
+    shop               — Open the merchant's shop
     help               — Show this list
     quit               — Exit the game
 """
