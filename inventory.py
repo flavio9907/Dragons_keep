@@ -42,6 +42,20 @@ ITEMS = {
         "type": "armor",
         "effect": {"defense": 4},
         "value": 30,
+        },
+    "steel_sword": {
+        "name": "Steel Sword",
+        "description": "A well-forged blade, still sharp. +10 Attack.",
+        "type": "weapon",
+        "effect": {"attack": 10},
+        "value": 45,
+    },
+    "chainmail": {
+        "name": "Chainmail Armor",
+        "description": "Interlocked steel rings. Heavy but protective. +8 Defense.",
+        "type": "armor",
+        "effect": {"defense": 8},
+        "value": 50,
     },
 }
 
@@ -270,3 +284,57 @@ def show_inventory(player: dict) -> None:
         item = ITEMS.get(item_name, {})
         print(f"     - {item.get('name', item_name)}: {item.get('description', '?')}")
     print()
+
+SHOP_INVENTORY = {
+    "health_potion": 15,
+    "iron_shield": 30,
+    "rusty_sword": 20,
+    "magic_scroll": 40,
+}
+
+def visit_shop(player: dict) -> dict:
+    """
+    Opens an interactive shop where the player can spend gold on items.
+
+    Parameters:
+        player (dict): The player's stats dictionary.
+
+    Returns:
+        dict: The updated player dictionary.
+    """
+    print(f"\n{'='*50}")
+    print("  🏪 MERCHANT'S SHOP")
+    print(f"  Your gold: 💰 {player['gold']}")
+    print(f"{'='*50}")
+
+    for item_key, price in SHOP_INVENTORY.items():
+        item = ITEMS.get(item_key, {})
+        print(f"  {item.get('name', item_key):<20} {price} gold  —  {item.get('description', '')}")
+
+    print("\n  Type an item name to buy it, or 'leave' to exit.")
+
+    while True:
+        try:
+            choice = input("  > ").strip().lower()
+        except (EOFError, KeyboardInterrupt):
+            break
+
+        if choice == "leave":
+            print("  🚶 You leave the shop.")
+            break
+
+        if choice not in SHOP_INVENTORY:
+            print("  ❌ That item isn't available. Check your spelling!")
+            continue
+
+        price = SHOP_INVENTORY[choice]
+        if player["gold"] < price:
+            print(f"  ❌ Not enough gold! You need {price} but only have {player['gold']}.")
+            continue
+
+        player["gold"] -= price
+        player["inventory"].append(choice)
+        item_name = ITEMS[choice]["name"]
+        print(f"  ✅ You bought {item_name}! Remaining gold: {player['gold']}")
+
+    return player
