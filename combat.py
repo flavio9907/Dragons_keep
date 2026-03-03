@@ -33,8 +33,8 @@ ENEMIES = {
     },
     "dragon_king": {
         "name": "Dragon King",
-        "hp": 120,
-        "max_hp": 120,
+        "hp": 250,
+        "max_hp": 250,
         "attack": 22,
         "defense": 10,
         "xp_reward": 200,
