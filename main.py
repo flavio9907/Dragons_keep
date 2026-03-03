@@ -7,7 +7,7 @@ Run with:  python main.py
 
 from world import describe_room, move, pick_up_item, clear_enemy, get_room
 from combat import run_combat
-from inventory import create_player, show_stats, pick_up, use_item, equip_item, drop_item, show_inventory
+from inventory import create_player, show_stats, pick_up, use_item, equip_item, drop_item, show_inventory, visit_shop
 
 # ---------------------------------------------------------------------------
 # GAME SETUP
@@ -165,6 +165,9 @@ def game_loop(player: dict, start_room: str = "entrance") -> None:
                 print("  ❌ Drop what?")
                 continue
             player = drop_item(player, arg)
+        # ── SHOP ──────────────────────────────────────────────────────────────
+        elif verb == "shop":
+            player = visit_shop(player)
 
         # ── UNKNOWN COMMAND ───────────────────────────────────────────────
         else:
