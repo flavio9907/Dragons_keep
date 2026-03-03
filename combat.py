@@ -33,12 +33,13 @@ ENEMIES = {
     },
     "dragon_king": {
         "name": "Dragon King",
-        "hp": 250,
-        "max_hp": 250,
+        "hp": 120,
+        "max_hp": 120,
         "attack": 22,
         "defense": 10,
         "xp_reward": 200,
         "gold_reward": 100,
+        "min_damage": 12,
         "description": "An ancient dragon sitting on a crumbling throne. Final boss.",
     },
     "skeleton": {
@@ -69,7 +70,7 @@ ENEMIES = {
         "defense": 6,
         "xp_reward": 60,
         "gold_reward": 20,
-        "description": "A hulking troll that hits hard and takes a beating.",
+        "description": "A hulking troll that regenerates health each turn.",
     },
     "wraith": {
         "name": "Wraith",
@@ -104,20 +105,21 @@ def get_enemy(enemy_id: str) -> dict:
     return {}
 
 
-def calculate_damage(attacker_attack: int, defender_defense: int) -> int:
+def calculate_damage(attacker_attack: int, defender_defense: int, min_damage: int = 1) -> int:
     """
     Calculate damage dealt after applying defense, with a small random variance.
 
     Parameters:
         attacker_attack (int): The attacker's attack stat.
         defender_defense (int): The defender's defense stat.
+        min_damage (int): The minimum damage that can be dealt (default 1).
 
     Returns:
-        int: The final damage value (minimum 1).
+        int: The final damage value (minimum min_damage).
     """
     base_damage = attacker_attack - defender_defense
     variance = random.randint(-2, 3)
-    return max(1, base_damage + variance)
+    return max(min_damage, base_damage + variance)
 
 
 def player_attack(player: dict, enemy: dict) -> dict:
@@ -163,7 +165,8 @@ def enemy_attack(enemy: dict, player: dict) -> dict:
         print(f"  🌀 The {enemy['name']} swings wildly and misses!")
         return player
 
-    damage = calculate_damage(enemy["attack"], player["defense"])
+    min_dmg = enemy.get("min_damage", 1)
+    damage = calculate_damage(enemy["attack"], player["defense"], min_dmg)
     player["hp"] = max(0, player["hp"] - damage)
 
     print(f"  🩸 The {enemy['name']} hits you for {damage} damage!")
