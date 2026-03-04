@@ -35,8 +35,8 @@ ENEMIES = {
         "name": "Dragon King",
         "hp": 250,
         "max_hp": 250,
-        "attack": 22,
-        "defense": 10,
+        "attack": 30,
+        "defense": 18,
         "xp_reward": 200,
         "gold_reward": 100,
         "min_damage": 12,
@@ -56,7 +56,7 @@ ENEMIES = {
         "name": "Giant Spider",
         "hp": 50,
         "max_hp": 50,
-        "attack": 12,
+        "attack": 16,
         "defense": 3,
         "xp_reward": 40,
         "gold_reward": 12,
@@ -66,7 +66,7 @@ ENEMIES = {
         "name": "Cave Troll",
         "hp": 70,
         "max_hp": 70,
-        "attack": 16,
+        "attack": 20,
         "defense": 6,
         "xp_reward": 60,
         "gold_reward": 20,
@@ -76,7 +76,7 @@ ENEMIES = {
         "name": "Wraith",
         "hp": 55,
         "max_hp": 55,
-        "attack": 14,
+        "attack": 20,
         "defense": 2,
         "xp_reward": 50,
         "gold_reward": 15,
@@ -196,8 +196,8 @@ def award_rewards(player: dict, enemy: dict) -> dict:
     print(f"\n  🏆 Victory! You defeated the {enemy['name']}!")
     print(f"     +{xp_gained} XP  |  +{gold_gained} Gold")
 
-    # Level up every 50 XP
-    xp_threshold = player["level"] * 50
+    # Level up every 100 XP
+    xp_threshold = player["level"] * 100
     if player["xp"] >= xp_threshold:
         player = level_up(player)
 
@@ -215,10 +215,10 @@ def level_up(player: dict) -> dict:
         dict: The updated player dictionary with improved stats.
     """
     player["level"] += 1
-    player["max_hp"] += 15
+    player["max_hp"] += 10
     player["hp"] = player["max_hp"]   # Full heal on level up
-    player["attack"] += 3
-    player["defense"] += 2
+    player["attack"] += 2
+    player["defense"] += 1
 
     print(f"\n  ✨ LEVEL UP! You are now Level {player['level']}!")
     print(f"     Max HP ↑ | Attack ↑ | Defense ↑ | Full HP restored!")
