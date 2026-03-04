@@ -54,7 +54,7 @@ ITEMS = {
         "name": "Chainmail Armor",
         "description": "Interlocked steel rings. Heavy but protective. +8 Defense.",
         "type": "armor",
-        "effect": {"defense": 8},
+        "effect": {"defense": 5},
         "value": 50,
     },
 }
