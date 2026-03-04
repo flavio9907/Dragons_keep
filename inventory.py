@@ -1,6 +1,6 @@
 """
 inventory.py — Player & Inventory System
-Person 3's module: defines the player, all items, and inventory management.
+Mehdi: defines the player, all items, and inventory management.
 """
 
 # ---------------------------------------------------------------------------
