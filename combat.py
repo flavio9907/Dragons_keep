@@ -1,6 +1,6 @@
 """
 combat.py — Combat System
-Person 2's module: defines all enemies, combat logic, and reward handling.
+Andres' module: defines all enemies, combat logic, and reward handling.
 """
 
 import random

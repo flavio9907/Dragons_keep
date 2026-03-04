@@ -1,6 +1,6 @@
 """
 world.py — World & Navigation System
-Person 1's module: defines all rooms, map layout, and movement logic.
+Flavio's module: defines all rooms, map layout, and movement logic.
 """
 
 ROOMS = {

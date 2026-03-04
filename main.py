@@ -1,6 +1,6 @@
 """
 main.py — Dragon's Keep: A Text-Based RPG
-Entry point. Ties together world.py, combat.py, and inventory.py.
+Flavio's Module: Entry point. Ties together world.py, combat.py, and inventory.py.
 
 Run with:  python main.py
 """
