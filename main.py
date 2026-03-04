@@ -14,10 +14,10 @@ from inventory import create_player, show_stats, pick_up, use_item, equip_item, 
 # ---------------------------------------------------------------------------
 
 GAME_TITLE = """
-╔══════════════════════════════════════════╗
-║         🐉  DRAGON'S KEEP  🐉           ║
-║      A Python Text-Based Adventure      ║
-╚══════════════════════════════════════════╝
+==========================================
+        🐉  DRAGON'S KEEP  🐉
+       A Classic Text-Based RPG
+==========================================
 """
 
 COMMANDS = """
