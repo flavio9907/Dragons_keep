@@ -32,7 +32,7 @@ ENEMIES = {
         "description": "A massive black wolf with glowing red eyes.",
     },
     "dragon_king": {
-        "name": "Dragon King",
+        "name": "Bogdan the Dragon King",
         "hp": 250,
         "max_hp": 250,
         "attack": 30,
@@ -40,7 +40,7 @@ ENEMIES = {
         "xp_reward": 200,
         "gold_reward": 100,
         "min_damage": 12,
-        "description": "An ancient dragon sitting on a crumbling throne. Final boss.",
+        "description": "An ancient dragon sitting on a crumbling throne. Bogdan has been waiting for you.",
     },
     "skeleton": {
         "name": "Skeleton Soldier",

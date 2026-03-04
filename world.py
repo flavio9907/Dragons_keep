@@ -168,7 +168,7 @@ ROOMS = {
         "name": "The Throne Room",
         "description": (
             "A massive chamber with a cracked throne at its center. "
-            "Bones litter the floor. On the throne sits the Dragon King — "
+            "Bones litter the floor. On the throne sits Bogdan the Dragon King — "
             "he was expecting you."
         ),
         "exits": {"south": "hallway"},
